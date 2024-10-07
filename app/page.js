@@ -12,7 +12,7 @@ const HomePage = () => {
             Experience seamless tour generation alongside a dedicated chat for
             all your research and planning, powered by OpenAI.
           </p>
-          <Link href="/chat" className="btn btn-secondary ">
+          <Link href="/chat" className="btn btn-secondary mt-2 px-6">
             Get Started
           </Link>
         </div>
