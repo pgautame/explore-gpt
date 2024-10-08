@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { generateChatResponse } from "@/utils/actions";
+import { FaUser } from "react-icons/fa6";
+import { BsFillRocketTakeoffFill } from "react-icons/bs";
 import toast from "react-hot-toast";
 
 const Chat = () => {
@@ -33,7 +35,8 @@ const Chat = () => {
     <div className="min-h-[calc(100vh-6rem)] grid grid-rows-[1fr,auto]">
       <div>
         {messages.map(({ role, content }, index) => {
-          const avatar = role == "user" ? "👤" : "🤖";
+          const avatar =
+            role == "user" ? <FaUser /> : <BsFillRocketTakeoffFill />;
           const bcg = role == "user" ? "bg-base-200" : "bg-base-100";
           return (
             <div
@@ -41,7 +44,7 @@ const Chat = () => {
               className={`${bcg} flex py-6 -mx-8 px-8
                text-xl leading-loose border-b border-base-300`}
             >
-              <span className="mr-4 ">{avatar}</span>
+              <span className="mr-4">{avatar}</span>
               <p className="max-w-3xl">{content}</p>
             </div>
           );
