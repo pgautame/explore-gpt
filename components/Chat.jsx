@@ -32,7 +32,11 @@ const Chat = () => {
   // console.log(messages);
 
   return (
-    <div className="min-h-[calc(100vh-6rem)] grid grid-rows-[1fr,auto]">
+    <div
+      className={`min-h-[calc(100vh-6rem)] ${
+        messages.length === 0 ? "mt-3" : "grid grid-rows-[1fr,auto]"
+      }`}
+    >
       <div>
         {messages.map(({ role, content }, index) => {
           const avatar =
@@ -44,7 +48,7 @@ const Chat = () => {
               className={`${bcg} flex py-6 -mx-8 px-8
                text-xl leading-loose border-b border-base-300`}
             >
-              <span className="mr-4">{avatar}</span>
+              <span className="mr-6">{avatar}</span>
               <p className="max-w-3xl">{content}</p>
             </div>
           );
@@ -52,6 +56,14 @@ const Chat = () => {
         {isPending && <span className="loading py-2"></span>}
       </div>
       <form onSubmit={handleSubmit} className="max-w-5xl pt-12">
+        <h1
+          className={`${
+            messages.length === 0 ? "block" : "hidden"
+          } text-4xl mb-8 font-bold flex justify-center`}
+        >
+          What can I help you with?
+        </h1>
+
         <div className="join w-full">
           <input
             type="text"

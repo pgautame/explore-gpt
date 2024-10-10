@@ -1,8 +1,8 @@
 import Link from "next/link";
 const links = [
   { href: "/chat", label: "chat" },
-  { href: "/tours/new-tour", label: "new tour" },
   { href: "/tours", label: "tours" },
+  { href: "/tours/new-tour", label: "new tour" },
   { href: "/profile", label: "profile" },
 ];
 
@@ -12,7 +12,7 @@ const NavLinks = () => {
       {links.map((link) => {
         return (
           <li key={link.href}>
-            <Link href={link.href} className="capitalize font-medium">
+            <Link href={link.href} className="capitalize font-medium text-lg">
               {link.label}
             </Link>
           </li>

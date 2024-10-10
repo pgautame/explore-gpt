@@ -40,22 +40,22 @@ const GuestCredentials = () => {
       {/* View Guest Credentials Button */}
       <button
         onClick={handleToggleCredentials}
-        className="bg-blue-500 text-white px-4 py-2 mb-6 rounded-xl hover:bg-blue-600 transition"
+        className="btn btn-primary px-4 py-2 mb-6"
       >
         Guest Credentials
       </button>
 
       {/* Guest Credentials Container */}
       {showCredentials && (
-        <div className="p-4 bg-white rounded-xl shadow-lg mb-4 border-solid border border-slate-200">
+        <div className="p-4 bg-base-200 rounded-xl shadow-lg mb-4 border border-base-200">
           {/* Email Section */}
           <div className="mb-2">
             <p className="font-bold">Email:</p>
             <div className="flex items-center space-x-2">
-              <span className="text-gray-700">{guestEmail}</span>
+              <span>{guestEmail}</span>
               <button
                 onClick={() => copyToClipboard(guestEmail)}
-                className="bg-gray-200 hover:bg-gray-300 px-2 py-1 text-sm rounded-lg transition"
+                className="bg-gray-400 hover:bg-gray-500 px-2 py-1 text-sm rounded-lg transition"
               >
                 Copy
               </button>
@@ -66,10 +66,10 @@ const GuestCredentials = () => {
           <div>
             <p className="font-bold">Password:</p>
             <div className="flex items-center space-x-2 space-y-1">
-              <span className="text-gray-700">{guestPassword}</span>
+              <span>{guestPassword}</span>
               <button
                 onClick={() => copyToClipboard(guestPassword)}
-                className="bg-gray-200 hover:bg-gray-300 px-2 py-1 text-sm rounded-lg transition"
+                className="bg-gray-400 hover:bg-gray-500 px-2 py-1 text-sm rounded-lg transition"
               >
                 Copy
               </button>
