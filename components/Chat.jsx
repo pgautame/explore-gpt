@@ -5,19 +5,33 @@ import { generateChatResponse } from "@/utils/actions";
 import { FaUser } from "react-icons/fa6";
 import { BsFillRocketTakeoffFill } from "react-icons/bs";
 import toast from "react-hot-toast";
+import { useAuth } from "@clerk/nextjs";
+import { fetchUserTokensById, subtractTokens } from "@/utils/actions";
 
 const Chat = () => {
   const [text, setText] = useState("");
   const [messages, setMessages] = useState([]);
 
+  const { userId } = useAuth();
+
   const { mutate, isPending } = useMutation({
-    mutationFn: (query) => generateChatResponse([...messages, query]),
-    onSuccess: (data) => {
-      if (!data) {
+    mutationFn: async (query) => {
+      const currentTokens = await fetchUserTokensById(userId);
+
+      if (currentTokens < 200) {
+        toast.error("Token balance too low....");
+        return;
+      }
+
+      const response = await generateChatResponse([...messages, query]);
+
+      if (!response) {
         toast.error("Something went wrong...");
         return;
       }
-      setMessages((prev) => [...prev, data]);
+      setMessages((prev) => [...prev, response.message]);
+      const newTokens = await subtractTokens(userId, response.tokens);
+      toast.success(`${newTokens} tokens remaining...`);
     },
   });
 
@@ -34,7 +48,7 @@ const Chat = () => {
   return (
     <div
       className={`min-h-[calc(100vh-6rem)] ${
-        messages.length === 0 ? "mt-3" : "grid grid-rows-[1fr,auto]"
+        messages.length === 0 ? "" : "grid grid-rows-[1fr,auto]"
       }`}
     >
       <div>
@@ -55,11 +69,11 @@ const Chat = () => {
         })}
         {isPending && <span className="loading py-2"></span>}
       </div>
-      <form onSubmit={handleSubmit} className="max-w-5xl pt-12">
+      <form onSubmit={handleSubmit} className="max-w-5xl">
         <h1
           className={`${
             messages.length === 0 ? "block" : "hidden"
-          } text-4xl mb-8 font-bold flex justify-center`}
+          } text-4xl mb-8 font-bold`}
         >
           What can I help you with?
         </h1>
@@ -81,6 +95,21 @@ const Chat = () => {
           >
             {isPending ? "please wait..." : "ask question"}
           </button>
+        </div>
+
+        <div>
+          {messages.length === 0 ? (
+            <h2 className="my-6 text-xs">
+              * uses tokens, visit{" "}
+              <a
+                href="/profile"
+                className="font-semibold underline underline-offset-2"
+              >
+                profile
+              </a>{" "}
+              for available token amount.
+            </h2>
+          ) : null}
         </div>
       </form>
     </div>

@@ -1,15 +1,19 @@
 "use client";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import TourInfo from "@/components/TourInfo";
 import {
   createNewTour,
+  fetchUserTokensById,
   generateTourResponse,
   getExistingTour,
+  subtractTokens,
 } from "@/utils/actions";
+import { useAuth } from "@clerk/nextjs";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import TourInfo from "@/components/TourInfo";
 
 const NewTour = () => {
   const queryClient = useQueryClient();
+  const { userId } = useAuth();
 
   const {
     mutate,
@@ -21,16 +25,25 @@ const NewTour = () => {
 
       if (existingTour) return existingTour;
 
-      const newTour = await generateTourResponse(destination);
+      const currentTokens = await fetchUserTokensById(userId);
 
-      if (newTour) {
-        await createNewTour(newTour);
-        queryClient.invalidateQueries({ queryKey: ["tours"] });
-        return newTour;
+      if (currentTokens < 400) {
+        toast.error("Token balance too low...");
+        return;
       }
 
-      toast.error("No matching city found, please retry...");
-      return null;
+      const newTour = await generateTourResponse(destination);
+
+      if (!newTour) {
+        toast.error("No matching city found, please retry...");
+        return null;
+      }
+
+      const response = await createNewTour(newTour.tour);
+      queryClient.invalidateQueries({ queryKey: ["tours"] });
+      const newTokens = await subtractTokens(userId, newTour.tokens);
+      toast.success(`${newTokens} tokens remaining...`);
+      return newTour.tour;
     },
   });
 
@@ -75,8 +88,24 @@ const NewTour = () => {
           </button>
         </div>
       </form>
-      <div className="mt-16">
-        <div className="mt-16">{tour ? <TourInfo tour={tour} /> : null}</div>
+
+      <div>
+        {tour ? null : (
+          <h2 className="my-6 text-xs">
+            * uses tokens, visit{" "}
+            <a
+              href="/profile"
+              className="font-semibold underline underline-offset-2"
+            >
+              profile
+            </a>{" "}
+            for available token amount.
+          </h2>
+        )}
+      </div>
+
+      <div className="mt-14">
+        <div className="mt-14">{tour ? <TourInfo tour={tour} /> : null}</div>
       </div>
     </>
   );
