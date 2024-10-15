@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![Banner](images/explore-gpt-banner.PNG)
 
-## Getting Started
+# ExploreGPT
 
-First, run the development server:
+**ExploreGPT** is an AI travel planner, designed to help you discover and plan trips efficiently.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Tour Generation**: Generate a tour itinerary based on your selected destination (city and country).
+- **Tour Search**: Browse through previously generated tours by location, enhanced with imagery from Unsplash.
+- **Chat Assistance**: Interact with ExploreGPT for any information or queries.
+- **Profile Management**: Manage your profile information and track available token balances.
+- **Guest Demo**: Experience the app as a guest (limited functionality).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Technologies Used
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **JavaScript**: The primary programming language used to build the application.
+- **Next.js**: React framework for building optimized, server-rendered web applications.
+- **Clerk**: Authentication and user management platform.
+- **Prisma**: ORM for interacting with the database and managing user data.
+- **React Query**: Efficient data fetching and state management.
+- **Tailwind CSS & DaisyUI**: For styling and UI components.
+- **OpenAI API**: Powered by the `gpt-4o-mini` model for generating tours and answering queries.
+- **Unsplash API**: Provides high-quality images for destinations.
+- **Supabase**: Used for database management and integration.
 
-## Learn More
+## Screenshots
 
-To learn more about Next.js, take a look at the following resources:
+![ExploreGPT](images/explore-gpt-landing.PNG)  
+_Landing page for ExploreGPT_
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![New Tour](images/explore-gpt-new-tour.PNG)  
+_Generate new tour based on destination_
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+![Tours](images/explore-gpt-tours.PNG)  
+_Explore generated tours by city or country_
 
-## Deploy on Vercel
+![Selected Tour](images/explore-gpt-selected-tour.PNG)  
+_Display selected tour with image and description_
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![Chat Assistance](images/explore-gpt-chat.PNG)  
+_Chat with ExploreGPT for any queries and planning_
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![Profile Management](images/explore-gpt-profile.PNG)  
+_Manage your profile and view available token amounts_
