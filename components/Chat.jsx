@@ -7,6 +7,7 @@ import { BsFillRocketTakeoffFill } from "react-icons/bs";
 import toast from "react-hot-toast";
 import { useAuth } from "@clerk/nextjs";
 import { fetchUserTokensById, subtractTokens } from "@/utils/actions";
+import TokenInfo from "./TokenInfo";
 
 const Chat = () => {
   const [text, setText] = useState("");
@@ -67,7 +68,7 @@ const Chat = () => {
             </div>
           );
         })}
-        {isPending && <span className="loading py-2"></span>}
+        {isPending && <span className="loading py-2 mt-6"></span>}
       </div>
       <form onSubmit={handleSubmit} className="max-w-5xl">
         <h1
@@ -78,7 +79,7 @@ const Chat = () => {
           What can I help you with?
         </h1>
 
-        <div className="join w-full">
+        <div className={`join w-full ${messages.length === 0 ? "" : "mt-8"}`}>
           <input
             type="text"
             placeholder="Message ExploreGPT"
@@ -97,20 +98,7 @@ const Chat = () => {
           </button>
         </div>
 
-        <div>
-          {messages.length === 0 ? (
-            <h2 className="my-6 text-xs">
-              * uses tokens, visit{" "}
-              <a
-                href="/profile"
-                className="font-semibold underline underline-offset-2"
-              >
-                profile
-              </a>{" "}
-              for available token amount.
-            </h2>
-          ) : null}
-        </div>
+        <div>{messages.length === 0 ? <TokenInfo /> : null}</div>
       </form>
     </div>
   );

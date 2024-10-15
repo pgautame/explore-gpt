@@ -10,6 +10,7 @@ import {
 import { useAuth } from "@clerk/nextjs";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import TokenInfo from "./TokenInfo";
 
 const NewTour = () => {
   const queryClient = useQueryClient();
@@ -38,6 +39,13 @@ const NewTour = () => {
         toast.error("No matching city found, please retry...");
         return null;
       }
+
+      newTour.tour.city =
+        newTour.tour.city.charAt(0).toUpperCase() +
+        newTour.tour.city.toLowerCase().slice(1);
+      newTour.tour.country =
+        newTour.tour.country.charAt(0).toUpperCase() +
+        newTour.tour.country.toLowerCase().slice(1);
 
       const response = await createNewTour(newTour.tour);
       queryClient.invalidateQueries({ queryKey: ["tours"] });
@@ -89,20 +97,7 @@ const NewTour = () => {
         </div>
       </form>
 
-      <div>
-        {tour ? null : (
-          <h2 className="my-6 text-xs">
-            * uses tokens, visit{" "}
-            <a
-              href="/profile"
-              className="font-semibold underline underline-offset-2"
-            >
-              profile
-            </a>{" "}
-            for available token amount.
-          </h2>
-        )}
-      </div>
+      <div>{tour ? null : <TokenInfo />}</div>
 
       <div className="mt-14">
         <div className="mt-14">{tour ? <TourInfo tour={tour} /> : null}</div>

@@ -12,7 +12,10 @@ const NavLinks = () => {
       {links.map((link) => {
         return (
           <li key={link.href}>
-            <Link href={link.href} className="capitalize font-medium text-lg">
+            <Link
+              href={link.href}
+              className="capitalize font-medium text-lg mb-1"
+            >
               {link.label}
             </Link>
           </li>

@@ -15,8 +15,8 @@ export const generateChatResponse = async (chatMessages) => {
         { role: "system", content: "You are a helpful assistant." },
         ...chatMessages,
       ],
-      model: "gpt-3.5-turbo",
-      // model: "gpt-4o-mini",
+      // model: "gpt-3.5-turbo",
+      model: "gpt-4o-mini",
       temperature: 0,
       max_tokens: 150,
     });
@@ -43,7 +43,7 @@ Once you have a list, create a one-day tour. Response should be in the following
     "country": "${country}",
     "title": "title of the tour",
     "description": "description of the city and tour",
-    "stops": ["short paragraph on the stop 1","short paragraph on the stop 2","short paragraph on the stop 3"]
+    "stops": ["very short description of stop1","very short description of stop2","very short description of stop3"]
   }
 }
 If you can't find info on exact ${city}, or ${city} does not exist, or it's population is less than 1, or it is not located in the following ${country} return { "tour": null }, with no additional characters.`;
@@ -54,8 +54,8 @@ If you can't find info on exact ${city}, or ${city} does not exist, or it's popu
         { role: "system", content: "you are a tour guide" },
         { role: "user", content: query },
       ],
-      model: "gpt-3.5-turbo",
-      // model: "gpt-4o-mini",
+      // model: "gpt-3.5-turbo",
+      model: "gpt-4o-mini",
       temperature: 0,
       max_tokens: 350,
     });

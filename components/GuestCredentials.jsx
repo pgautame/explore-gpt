@@ -55,7 +55,7 @@ const GuestCredentials = () => {
               <span>{guestEmail}</span>
               <button
                 onClick={() => copyToClipboard(guestEmail)}
-                className="bg-gray-400 hover:bg-gray-500 px-2 py-1 text-sm rounded-lg transition"
+                className="text-white bg-primary hover:bg-primary-focus px-2 py-1 text-sm rounded-lg transition"
               >
                 Copy
               </button>
@@ -69,7 +69,7 @@ const GuestCredentials = () => {
               <span>{guestPassword}</span>
               <button
                 onClick={() => copyToClipboard(guestPassword)}
-                className="bg-gray-400 hover:bg-gray-500 px-2 py-1 text-sm rounded-lg transition"
+                className="text-white bg-primary hover:bg-primary-focus px-2 py-1 text-sm rounded-lg transition"
               >
                 Copy
               </button>

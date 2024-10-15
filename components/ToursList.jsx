@@ -2,7 +2,11 @@ import TourCard from "./TourCard";
 
 const ToursList = ({ data }) => {
   if (data.length === 0)
-    return <h1 className="text-lg mb-8 flex">No tours found...</h1>;
+    return (
+      <h1 className="text-lg mb-8 flex">
+        No tours found. Start creating with 'New Tour'.
+      </h1>
+    );
 
   return (
     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
