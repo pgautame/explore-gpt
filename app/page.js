@@ -4,12 +4,12 @@ import World from "../images/world-new.svg";
 
 const HomePage = () => {
   return (
-    <div className="hero bg-base-200 min-h-screen p-10">
-      <div className="hero-content flex-col md:flex-row-reverse">
+    <div className="hero bg-base-200 min-h-screen overflow-hidden">
+      <div className="hero-content p-4 md:p-10 flex-col md:flex-row-reverse">
         <Image
           src={World}
           alt="logo"
-          className="max-w-sm md:max-w-md lg:max-w-lg common-transition"
+          className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg common-transition"
           priority
         />
         <div className="max-w-xl">
