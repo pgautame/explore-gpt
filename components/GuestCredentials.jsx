@@ -25,7 +25,7 @@ const GuestCredentials = () => {
       .then(() => {
         // alert("Copied to clipboard");
         let message = text.includes("@") ? "Email" : "Password";
-        toast.success(`${message} copied to clipboard!`);
+        toast.success(`${message} copied!`);
       })
       .catch((err) => {
         console.error("Failed to copy: ", err);
@@ -74,6 +74,12 @@ const GuestCredentials = () => {
                 Copy
               </button>
             </div>
+          </div>
+
+          <div className="mt-4">
+            <span className="text-sm text-red-400">
+              * not real credentials, only for demo purposes.
+            </span>
           </div>
         </div>
       )}
