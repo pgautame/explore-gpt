@@ -5,3 +5,9 @@
 .common-transition {
   @apply transition-all duration-300 ease-in-out;
 }
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
